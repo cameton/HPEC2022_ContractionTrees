@@ -1,0 +1,13 @@
+[deps]
+CSV = "336ed68f-0bac-5ca0-87d4-7b16caf5d00b"
+Coarsening = "fa4a4bc5-bd7a-4529-8ba0-b14811c39d94"
+DataFrames = "a93c6f00-e57d-5684-b7b6-d8193f3e46c0"
+DataStructures = "864edb3b-99cc-5e75-8d2d-829cb0a9cfe8"
+GraphIO = "aa1b3936-2fda-51b9-ab35-c553d3a640a2"
+Graphs = "86223c79-3864-5bf0-83f7-82e725a168b6"
+LaTeXStrings = "b964fa9f-0449-5b57-a5c2-d3ea65f4040f"
+LinearOrdering = "b288b746-693a-4026-be67-aedbea366661"
+MatrixMarket = "4d4711f2-db25-561a-b6b3-d35e7d4047d3"
+Multilevel = "5b7e5218-eff4-4de9-9575-7b37f1fec5b6"
+StatsPlots = "f3b207a7-027a-5e70-b257-86293d7955fd"
+TickTock = "9ff05d80-102d-5586-aa04-3a8bd1a90d20"
