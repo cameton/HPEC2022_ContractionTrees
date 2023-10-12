@@ -9,9 +9,10 @@ onesum = PSum(1)
 
 
 # CALL THIS
-function gettree(A, maxiter, maxtime)
-    table, position_to_idx = gettable(A, maxiter, maxtime)
-    return recurtable(table, 1, size(A, 2)), position_to_idx
+# cost = tops, tsize | merge = log2sumexp2, max
+function gettree(A, maxiter, maxtime, costfn, mergefn)
+    table, position_to_idx = gettable(A, maxiter, maxtime, costfn, mergefn)
+    return table[1, size(A, 2)][1], recurtable(table, 1, size(A, 2)), position_to_idx
 end
 
 function config_gen(i) 
@@ -36,7 +37,7 @@ function recurtable(table, i, j)
 end
 
 
-function gettable(A, maxiter, maxtime)
+function gettable(A, maxiter, maxtime, costfn, mergefn)
     bestcost, bestseed, besttime = Inf, 1, 0
     G = SimpleGraph(A)
     n = nv(G)
@@ -48,7 +49,8 @@ function gettable(A, maxiter, maxtime)
         config = config_gen(i)
         position_to_idx, idx_to_position = ordergraph(onesum, G; config...);
         pmap = PositionMap(position_to_idx, idx_to_position)
-        cost = _iter_width!(table, between, A, pmap; cost=tops, merge=log2sumexp2)[1, end][1]
+
+        cost = _iter_width!(table, between, A, pmap; cost=costfn, merge=mergefn)[1, end][1]
         t = peektimer()
         if t >= maxtime
             break
@@ -62,6 +64,6 @@ function gettable(A, maxiter, maxtime)
     config = config_gen(bestseed)
     position_to_idx, idx_to_position = ordergraph(onesum, G; config...);
     pmap = PositionMap(position_to_idx, idx_to_position)
-    cost = _iter_width!(table, between, A, pmap; cost=tops, merge=log2sumexp2)[1, end][1]
+    cost = _iter_width!(table, between, A, pmap; cost=costfn, merge=mergefn)[1, end][1]
     return table, position_to_idx
 end
